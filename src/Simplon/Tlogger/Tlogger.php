@@ -4,28 +4,28 @@
 
     class Tlogger
     {
-        protected $_urlLoggingPath;
+        protected $_urlLogging;
         protected $_topicId;
         protected $_parameters = [];
 
         // ######################################
 
         /**
-         * @param $urlLoggingPath
+         * @param $urlLogging
          */
-        public function __construct($urlLoggingPath)
+        public function __construct($urlLogging)
         {
-            $this->_urlLoggingPath = $urlLoggingPath;
+            $this->_urlLogging = $urlLogging;
         }
 
         // ######################################
 
         /**
-         * @return mixed
+         * @return string
          */
-        protected function _getUrlLoggingPath()
+        protected function _getUrlLogging()
         {
-            return $this->_urlLoggingPath;
+            return rtrim($this->_urlLogging, '/');
         }
 
         // ######################################
@@ -43,11 +43,11 @@
         // ######################################
 
         /**
-         * @param $parameters
+         * @param array $parameters
          *
          * @return $this
          */
-        public function setParameters($parameters)
+        public function setParameters(array $parameters)
         {
             $this->_parameters = array_merge($this->_parameters, $parameters);
 
@@ -92,20 +92,26 @@
         // ######################################
 
         /**
+         * @return string
+         */
+        protected function _getFinalUrlWithParameters()
+        {
+            return $this->_getUrlLogging() . '?' . $this->_getParametersAsUrlQuery();
+        }
+
+        // ######################################
+
+        /**
          * @return bool
          */
-        public function push()
+        public function release()
         {
-            // build final url
-            $urlLoggingPathWithParameters = $this->_getUrlLoggingPath() . '?' . $this->_getParametersAsUrlQuery();
-
             // log data
-            \CURL::init($urlLoggingPathWithParameters)
-                ->setReturnTransfer(TRUE)
+            \CURL::init($this->_getFinalUrlWithParameters())
                 ->execute();
 
             // reset data
-            $this->reset();
+            $this->_reset();
 
             return TRUE;
         }
@@ -115,7 +121,7 @@
         /**
          * @return $this
          */
-        public function reset()
+        protected function _reset()
         {
             $this->_parameters = [];
 
