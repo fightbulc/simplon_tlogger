@@ -2,7 +2,7 @@
     "name": "simplon/tlogger",
     "description": "High Traffic Logger with NGINX proxy",
     "homepage": "https://github.com/fightbulc/simplon_tlogger",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "type": "library",
     "keywords": ["traffic", "logger", "nginx", "proxy"],
     "license": "MIT",
