@@ -37,7 +37,7 @@
          */
         public function setTopicId($topicId)
         {
-            return $this->addParameter('tid', $topicId);
+            return $this->addParameter('topic_id', $topicId);
         }
 
         // ######################################
@@ -64,7 +64,10 @@
          */
         public function addParameter($key, $value)
         {
-            $this->_parameters[$key] = $value;
+            if (!isset($this->_parameters[$key]))
+            {
+                $this->_parameters[$key] = $value;
+            }
 
             return $this;
         }
