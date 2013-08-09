@@ -1,0 +1,30 @@
+{
+    "name": "simplon/tlogger",
+    "description": "High Traffic Logger with NGINX proxy",
+    "homepage": "https://github.com/fightbulc/simplon_tlogger",
+    "version": "0.0.1",
+    "type": "library",
+    "keywords": ["traffic", "logger", "nginx", "proxy"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tino Ehrich",
+            "email": "opensource@efides.com",
+            "role": "developer"
+        }
+    ],
+
+    "minimum-stability": "dev",
+
+    "require": {
+        "php": ">=5.4",
+        "fightbulc/php_curl": "1.0.0",
+        "ext-json": "*"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Simplon\\Tlogger": "src/"
+        }
+    }
+}
